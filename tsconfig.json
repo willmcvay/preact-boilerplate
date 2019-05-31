@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "moduleResolution": "node",
+    "noImplicitAny": false,
+    "allowJs": true,
+    "noEmit": true,
+    "strict": true,
+    "jsx": "react",
+    "jsxFactory": "h",
+    "typeRoots": [
+      "./src/types/*"
+    ]
+  },
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "public",
+    "dist",
+    "./webpack.config.js"
+  ]
+}

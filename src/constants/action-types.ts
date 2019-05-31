@@ -1,0 +1,4 @@
+export const LOADING_HOME = 'LOADING_HOME'
+export const LOADING_ITEM = 'LOADING_ITEM'
+export const FETCHING_HOME = 'FETCHING_HOME'
+export const FETCHING_ITEM = 'FETCHING_ITEM'
