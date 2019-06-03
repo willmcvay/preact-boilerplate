@@ -1,8 +1,8 @@
 import { h } from 'preact'
-import global from '../../styles/global'
+import styles from '../../styles/global'
 
 const Home = () => {
-  return <div class={global}>Home Page</div>
+  return <div class={styles.global}>Home Page</div>
 }
 
 export default Home

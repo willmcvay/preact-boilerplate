@@ -30,8 +30,18 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.css$/,
+        use: ['style-loader', 'astroturf/css-loader', 'postcss-loader']
+      },
+      {
         test: /.tsx?$/,
-        use: [{ loader: 'ts-loader', options: { transpileOnly: true } }]
+        use: [
+          {
+            loader: 'ts-loader',
+            options: { transpileOnly: true }
+          },
+          'astroturf/loader'
+        ]
       },
       {
         test: /\.(svg|png|jpg|jpeg|gif)$/,

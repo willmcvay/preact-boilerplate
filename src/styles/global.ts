@@ -1,3 +1,6 @@
-import { style } from 'typestyle'
+import { css } from 'astroturf'
 
-export default style({})
+export default css`
+  .global {
+  }
+`

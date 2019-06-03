@@ -10,7 +10,11 @@
     "jsxFactory": "h",
     "typeRoots": [
       "./src/types/*"
-    ]
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "react": ["./node_modules/preact-compat"]
+    }
   },
   "include": [
     "src"
