@@ -7,14 +7,20 @@
     "noEmit": true,
     "strict": true,
     "jsx": "react",
-    "jsxFactory": "h",
+    "types": [
+      "jest",
+      "node"
+    ],
     "typeRoots": [
-      "./src/types/*"
+      "./src/types",
+      "./node_modules/@types"
     ],
     "baseUrl": ".",
     "paths": {
-      "react": ["./node_modules/preact-compat"]
-    }
+    },
+    "lib": [
+      "es2015", "es2017", "dom", "es5", "es6", "esnext"
+    ]
   },
   "include": [
     "src"

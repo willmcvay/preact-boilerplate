@@ -1,5 +1,5 @@
-import { h } from 'preact'
+import * as React from 'react'
 
-const Item = () => <div>Item Page</div>
+const Item: React.FunctionComponent<{}> = () => <div>Item Page</div>
 
 export default Item

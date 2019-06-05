@@ -1,8 +1,8 @@
-import { h } from 'preact'
-import styles from '../../styles/global'
+import * as React from 'react'
+// import styles from '../../styles/global'
 
-const Home = () => {
-  return <div class={styles.global}>Home Page</div>
+const Home: React.FunctionComponent<{}> = () => {
+  return <div>Home Page</div>
 }
 
 export default Home

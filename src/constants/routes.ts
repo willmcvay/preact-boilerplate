@@ -1,2 +1,6 @@
-export const HOME = '/'
-export const ITEM = '/item/'
+const Routes = {
+  HOME: '/',
+  ITEM: '/item/'
+}
+
+export default Routes

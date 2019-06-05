@@ -1,14 +1,17 @@
-import { h } from 'preact'
-import { Route, Router as PreactRouter, RouterOnChangeArgs } from 'preact-router'
-import Home from '../components/pages/home'
-import Item from '../components/pages/item'
-import routeFetcher from '../utils/route-fetcher'
+import * as React from 'react'
+import { Route, BrowserRouter } from 'react-router-dom'
+import loadable from '@loadable/component'
+import RouteFetcher from '../components/hocs/route-fetcher'
+import Routes from '../constants/routes'
+
+const Home = loadable(() => import('../components/pages/home'))
+const Item = loadable(() => import('../components/pages/item'))
 
 const Router = () => (
-  <PreactRouter onChange={routeFetcher}>
-    <Route path="/" component={Home} />
-    <Route path="/item/" component={Item} />
-  </PreactRouter>
+  <BrowserRouter>
+    <Route path={Routes.HOME} exact render={props => <RouteFetcher routerProps={props} Component={Home} />} />
+    <Route path={Routes.ITEM} render={props => <RouteFetcher routerProps={props} Component={Item} />} />
+  </BrowserRouter>
 )
 
 export default Router

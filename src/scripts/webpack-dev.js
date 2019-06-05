@@ -30,17 +30,12 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.css$/,
-        use: ['style-loader', 'astroturf/css-loader', 'postcss-loader']
-      },
-      {
         test: /.tsx?$/,
         use: [
           {
             loader: 'ts-loader',
             options: { transpileOnly: true }
-          },
-          'astroturf/loader'
+          }
         ]
       },
       {
@@ -57,11 +52,7 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js'],
-    alias: {
-      react: 'preact-compat',
-      'react-dom': 'preact-compat'
-    }
+    extensions: ['.tsx', '.ts', '.js']
   },
   devtool: 'inline-source-map',
   devServer: {
