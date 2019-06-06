@@ -1,4 +1,5 @@
 export const API_CONSTANTS = {
+  // headers not required yet, uncomment as appropriate
   // headers: { 'Content-Type': 'application/json'},
   // dataType: 'json',
   // credentials: 'include',

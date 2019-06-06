@@ -1,10 +1,10 @@
 import * as React from 'react'
 import { shallow } from 'enzyme'
 import toJson from 'enzyme-to-json'
-import Home from '../home'
+import Router from '../router'
 
-describe('Home', () => {
+describe('Router', () => {
   it('should match a snapshot', () => {
-    expect(toJson(shallow(<Home />))).toMatchSnapshot()
+    expect(toJson(shallow(<Router />))).toMatchSnapshot()
   })
 })

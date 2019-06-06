@@ -1,11 +1,11 @@
-import { createStore, applyMiddleware, compose, combineReducers, Store as ReduxStore, AnyAction } from 'redux'
+import { createStore, applyMiddleware, compose, combineReducers, Store as ReduxStore } from 'redux'
 import thunk, { ThunkDispatch } from 'redux-thunk'
 import home from '../reducers/home'
 import item from '../reducers/item'
 import { ReduxState } from '../types/state'
 import { Action } from '../types/core'
 
-class Store {
+export class Store {
   static _instance: Store
 
   static get instance() {

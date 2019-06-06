@@ -7,9 +7,14 @@ import Store from './store'
 
 const rootElement = document.querySelector('#root') as Element
 
-render(
+const App = () => (
   <Provider store={Store.reduxStore}>
     <Router />
-  </Provider>,
-  rootElement
+  </Provider>
 )
+
+if (rootElement) {
+  render(<App />, rootElement)
+}
+
+export default App

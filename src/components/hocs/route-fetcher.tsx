@@ -7,7 +7,7 @@ import { RouteValue } from '../../types/core'
 
 interface RouteFetcherProps {
   routerProps: RouteComponentProps<any, StaticContext, any>
-  Component: LoadableComponent<any>
+  Component: LoadableComponent<any> | React.FunctionComponent
 }
 
 const RouteFetcher: React.FunctionComponent<RouteFetcherProps> = ({ routerProps, Component }) => {

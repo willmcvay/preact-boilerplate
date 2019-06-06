@@ -13,7 +13,7 @@
     "dev": "webpack-dev-server --hot --progress --color --mode development --config ./src/scripts/webpack-dev.js",
     "bundle-checker": "node ./src/scripts/bundle-phobia.js",
     "lint": "tslint --fix --project tsconfig.json --format stylish",
-    "test": "jest",
+    "test": "jest --coverage",
     "test-dev": "jest --watch --verbose",
     "lighthouse-test": "npx jest --config='src/tests/lighthouse/jest.config.js'",
     "webdriver-test": "wdio ./src/scripts/wdio.conf.js"
