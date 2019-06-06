@@ -3,12 +3,12 @@ import { render } from 'react-dom'
 import Router from './router'
 import { Provider } from 'react-redux'
 
-import store from './store'
+import Store from './store'
 
 const rootElement = document.querySelector('#root') as Element
 
 render(
-  <Provider store={store.reduxStore}>
+  <Provider store={Store.reduxStore}>
     <Router />
   </Provider>,
   rootElement

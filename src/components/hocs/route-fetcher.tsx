@@ -2,6 +2,8 @@ import * as React from 'react'
 import { LoadableComponent } from '@loadable/component'
 import { RouteComponentProps } from 'react-router-dom'
 import { StaticContext } from 'react-router'
+import routeDispatcher from '../../utils/route-dispatcher'
+import { RouteValue } from '../../types/core'
 
 interface RouteFetcherProps {
   routerProps: RouteComponentProps<any, StaticContext, any>
@@ -9,8 +11,7 @@ interface RouteFetcherProps {
 }
 
 const RouteFetcher: React.FunctionComponent<RouteFetcherProps> = ({ routerProps, Component }) => {
-  console.log('Route changing', routerProps)
-
+  routeDispatcher(routerProps.match.path as RouteValue)
   return <Component />
 }
 

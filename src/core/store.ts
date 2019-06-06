@@ -1,7 +1,9 @@
-import { createStore, applyMiddleware, compose, combineReducers, Store as ReduxStore } from 'redux'
-import thunk from 'redux-thunk'
+import { createStore, applyMiddleware, compose, combineReducers, Store as ReduxStore, AnyAction } from 'redux'
+import thunk, { ThunkDispatch } from 'redux-thunk'
 import home from '../reducers/home'
 import item from '../reducers/item'
+import { ReduxState } from '../types/state'
+import { Action } from '../types/core'
 
 class Store {
   static _instance: Store
@@ -22,21 +24,17 @@ class Store {
   })
 
   static composeEnhancers =
-    !Store.isProd && (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-      ? (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__()
+    !Store.isProd && window && (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+      ? (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
       : compose
 
-  reduxStore: ReduxStore
+  reduxStore: ReduxStore<ReduxState>
 
   constructor() {
-    this.reduxStore = createStore(
-      Store.reducers,
-      {},
-      Store.composeEnhancers(
-        applyMiddleware(thunk)
-        // other store enhancers if any
-      )
-    )
+    const composed = Store.composeEnhancers(applyMiddleware(thunk))
+
+    this.reduxStore = createStore(Store.reducers, composed)
+    this.hotModuleReloading()
   }
 
   hotModuleReloading() {
@@ -50,11 +48,11 @@ class Store {
     }
   }
 
-  get dispatch() {
+  get dispatch(): ThunkDispatch<ReduxState, void, Action<any>> {
     return this.reduxStore.dispatch
   }
 
-  get state() {
+  get state(): ReduxState {
     return this.reduxStore.getState()
   }
 }

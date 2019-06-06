@@ -44,10 +44,19 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js'],
-    alias: {
-      react: 'preact-compat',
-      'react-dom': 'preact-compat'
+    extensions: ['.tsx', '.ts', '.js']
+  },
+  optimization: {
+    nodeEnv: 'production',
+    splitChunks: {
+      chunks: 'all',
+      minChunks: 2,
+      cacheGroups: {
+        default: {
+          minChunks: 2,
+          reuseExistingChunk: true
+        }
+      }
     }
   }
 }

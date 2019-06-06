@@ -57,8 +57,20 @@ module.exports = {
   devtool: 'inline-source-map',
   devServer: {
     clientLogLevel: 'warning',
-    open: true,
     historyApiFallback: true,
     stats: 'errors-only'
+  },
+  optimization: {
+    nodeEnv: 'development',
+    splitChunks: {
+      chunks: 'all',
+      minChunks: 2,
+      cacheGroups: {
+        default: {
+          minChunks: 2,
+          reuseExistingChunk: true
+        }
+      }
+    }
   }
 }

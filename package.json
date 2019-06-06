@@ -10,7 +10,6 @@
   "scripts": {
     "build": "webpack --color --mode production --config ./src/scripts/webpack-prod.js",
     "start": "node ./public/index.js",
-    "predev": "yarn bundle-checker",
     "dev": "webpack-dev-server --hot --progress --color --mode development --config ./src/scripts/webpack-dev.js",
     "bundle-checker": "node ./src/scripts/bundle-phobia.js",
     "lint": "tslint --fix --project tsconfig.json --format stylish",
@@ -84,6 +83,11 @@
     ],
     "setupFiles": [
       "<rootDir>/src/scripts/jest-setup.js"
+    ],
+    "collectCoverageFrom": [
+    ],
+    "modulePathIgnorePatterns": [
+      "<rootDir>[/\\\\](node_modules)[/\\\\]"
     ]
   },
   "husky": {

@@ -9,10 +9,11 @@
     "jsx": "react",
     "types": [
       "jest",
-      "node"
+      "node",
+      "react"
     ],
     "typeRoots": [
-      "./src/types",
+      "./src/types/index.d.ts",
       "./node_modules/@types"
     ],
     "baseUrl": ".",
@@ -28,6 +29,7 @@
   "exclude": [
     "public",
     "dist",
-    "./webpack.config.js"
+    "./webpack.config.js",
+    "node_modules"
   ]
 }

@@ -14,3 +14,8 @@ export interface ActionCreator<T> {
 export type RouteValue = keyof typeof Routes
 
 export type ActionType = keyof typeof ActionTypes
+
+export interface FetcherParams {
+  method: 'GET' | 'POST' | 'PUT' | 'DELETE'
+  url: string
+}
