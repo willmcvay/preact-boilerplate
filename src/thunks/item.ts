@@ -11,8 +11,10 @@ export const itemDataFetch = () => async (dispatch: Dispatch) => {
     const redditData = await fetcher({ url: URLS.node, method: 'GET' })
 
     if (redditData) {
-      dispatch(itemReceiveData(redditData as ItemItem))
+      return dispatch(itemReceiveData(redditData as ItemItem))
     }
+
+    throw new Error('Error fetching data')
   } catch (err) {
     console.error(err.message)
   }

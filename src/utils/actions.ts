@@ -10,5 +10,3 @@ export const actionCreator = <T>(type: string): ActionCreator<T> =>
  */
 export const isType = <T>(action: Action<any>, actionCreator: ActionCreator<T>): action is Action<T> =>
   action.type === actionCreator.type
-
-export const isRoute = <T>(path: string, route: RouteValue): path is RouteValue => path === route

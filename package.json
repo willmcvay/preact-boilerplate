@@ -85,6 +85,8 @@
       "<rootDir>/src/scripts/jest-setup.js"
     ],
     "collectCoverageFrom": [
+      "<rootDir>/src/**/*.ts",
+      "<rootDir>/src/**/*.tsx"
     ],
     "modulePathIgnorePatterns": [
       "<rootDir>[/\\\\](node_modules)[/\\\\]"
