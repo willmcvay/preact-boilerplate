@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { Container, Header, Menu, Divider, Loader, Dimmer } from 'semantic-ui-react'
 import { ReduxState, ReduxDispatch } from '../../types/core'
 import { ItemState } from '../../reducers/item'
 import { itemClearData } from '../../actions/item'
@@ -18,26 +19,37 @@ export interface ItemMappedProps {
 export type ItemProps = ItemMappedActions & ItemMappedProps
 
 export const Item: React.FunctionComponent<ItemProps> = ({ itemClearData, itemDataFetch, itemState }) => (
-  <>
-    <h1>Node JS</h1>
-    <div>
-      <a onClick={itemClearData}>Clear All</a>
-    </div>
-    <div>
-      <a onClick={itemDataFetch}>Fetch All</a>
-    </div>
-    <div>
-      <Link to={Routes.HOME}>Home Page</Link>
-    </div>
-    {itemState.itemData &&
+  <Container text>
+    <Header as="h1">Node JS</Header>
+    <Menu>
+      <Menu.Item>
+        <a onClick={itemClearData}>Clear All</a>
+      </Menu.Item>
+      <Menu.Item>
+        <a onClick={itemDataFetch}>Fetch All</a>
+      </Menu.Item>
+      <Menu.Item>
+        <Link to={Routes.HOME}>Home Page</Link>
+      </Menu.Item>
+    </Menu>
+    {itemState.loading ? (
+      <Container>
+        <Dimmer active inverted>
+          <Loader size="large">Loading</Loader>
+        </Dimmer>
+      </Container>
+    ) : (
+      itemState.itemData &&
       itemState.itemData.data.children.map(child => (
         <div key={child.data.id}>
           <a target="_blank" href={child.data.url}>
             {child.data.title}
           </a>
+          <Divider />
         </div>
-      ))}
-  </>
+      ))
+    )}
+  </Container>
 )
 
 const mapStateToProps = (state: ReduxState): ItemMappedProps => ({

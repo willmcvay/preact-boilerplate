@@ -1,31 +1,37 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Home should match a snapshot 1`] = `
-<Fragment>
-  <h1>
+<Container
+  text={true}
+>
+  <Header
+    as="h1"
+  >
     React JS
-  </h1>
-  <div>
-    <a
-      onClick={[MockFunction]}
-    >
-      Clear All
-    </a>
-  </div>
-  <div>
-    <a
-      onClick={[MockFunction]}
-    >
-      Fetch All
-    </a>
-  </div>
-  <div>
-    <Link
-      to="/item/"
-    >
-      Item Page
-    </Link>
-  </div>
+  </Header>
+  <Menu>
+    <MenuItem>
+      <a
+        onClick={[MockFunction]}
+      >
+        Clear All
+      </a>
+    </MenuItem>
+    <MenuItem>
+      <a
+        onClick={[MockFunction]}
+      >
+        Fetch All
+      </a>
+    </MenuItem>
+    <MenuItem>
+      <Link
+        to="/item/"
+      >
+        Item Page
+      </Link>
+    </MenuItem>
+  </Menu>
   <div
     key="someid"
   >
@@ -35,6 +41,7 @@ exports[`Home should match a snapshot 1`] = `
     >
       Title
     </a>
+    <Divider />
   </div>
-</Fragment>
+</Container>
 `;
