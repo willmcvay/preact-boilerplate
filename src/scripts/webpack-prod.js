@@ -1,6 +1,7 @@
 const path = require('path')
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
   context: process.cwd(),
@@ -33,6 +34,11 @@ module.exports = {
         minifyCSS: true,
         minifyURLs: true
       }
+    }),
+    new BundleAnalyzerPlugin({
+      generateStatsFile: true,
+      analyzerMode: 'disabled',
+      generateStatsFile: true
     })
   ],
   module: {

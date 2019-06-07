@@ -8,10 +8,10 @@ export const homeDataFetch = () => async (dispatch: Dispatch) => {
   try {
     dispatch(homeLoading(true))
 
-    const redditData = await fetcher({ url: URLS.react, method: 'GET' })
+    const redditData = await fetcher<HomeItem, undefined>({ url: URLS.react, method: 'GET' })
 
     if (redditData) {
-      return dispatch(homeReceiveData(redditData as HomeItem))
+      return dispatch(homeReceiveData(redditData))
     }
 
     throw new Error('Error fetching data')

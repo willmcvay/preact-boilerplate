@@ -1,13 +1,14 @@
 import { API_CONSTANTS, BASE_URL } from '../constants/api'
 import { FetcherParams } from '../types/core'
 
-const fetcher = async <T>({ url, method }: FetcherParams) => {
+const fetcher = async <T, B>({ url, method, body }: FetcherParams<B>) => {
   const path = `${BASE_URL}${url}`
 
   try {
     const res = await fetch(path, {
       ...API_CONSTANTS,
-      method
+      method,
+      body
     } as RequestInit)
 
     if (res.status < 400) {

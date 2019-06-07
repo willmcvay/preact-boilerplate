@@ -15,7 +15,8 @@ export type RouteValue = keyof typeof Routes
 
 export type ActionType = keyof typeof ActionTypes
 
-export interface FetcherParams {
+export interface FetcherParams<T> {
   method: 'GET' | 'POST' | 'PUT' | 'DELETE'
   url: string
+  body?: T
 }

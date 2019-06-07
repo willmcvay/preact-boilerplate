@@ -29,4 +29,5 @@ http
   })
   .listen(port)
 
-console.log(`Listening on port ${port}`)
+process.title = process.argv[2]
+console.log(`Listening on port ${port}, app name ${process.title}`)
