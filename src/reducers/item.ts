@@ -1,7 +1,23 @@
 import { Action } from '../types/core'
 import { isType } from '../utils/actions'
-import { itemLoading, itemReceiveData } from '../actions/item'
-import { ItemState } from '../types/item'
+import { itemLoading, itemReceiveData, itemClearData } from '../actions/item'
+
+export interface ItemItem {
+  data: {
+    children: {
+      data: {
+        id: string
+        title: string
+        url: string
+      }
+    }[]
+  }
+}
+
+export interface ItemState {
+  loading: boolean
+  itemData: ItemItem | null
+}
 
 export const defaultState: ItemState = {
   loading: false,
@@ -17,6 +33,14 @@ const itemReducer = (state: ItemState = defaultState, action: Action<any>): Item
   }
 
   if (isType(action, itemReceiveData)) {
+    return {
+      ...state,
+      loading: false,
+      itemData: action.data
+    }
+  }
+
+  if (isType(action, itemClearData)) {
     return {
       ...state,
       loading: false,

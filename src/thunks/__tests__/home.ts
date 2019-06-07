@@ -2,6 +2,7 @@ import { homeDataFetch } from '../home'
 import ActionTypes from '../../constants/action-types'
 import * as fetcher from '../../utils/fetcher'
 import { URLS } from '../../constants/api'
+import { homeDataStub } from '../__stubs__/home'
 
 jest.mock('../../utils/fetcher')
 
@@ -10,8 +11,7 @@ const mockDispatch = jest.fn()
 describe('home thunks', () => {
   describe('homeDataFetch', () => {
     it('should receive data', async () => {
-      const data = { name: 'Bob' }
-      const fetcherSpy = jest.spyOn(fetcher, 'default').mockReturnValue(Promise.resolve(data))
+      const fetcherSpy = jest.spyOn(fetcher, 'default').mockReturnValue(Promise.resolve(homeDataStub))
 
       await homeDataFetch()(mockDispatch)
 
@@ -22,7 +22,7 @@ describe('home thunks', () => {
       })
       expect(mockDispatch).toHaveBeenCalledWith({
         type: ActionTypes.HOME_RECEIVE_DATA,
-        data
+        data: homeDataStub
       })
       expect(fetcherSpy).toHaveBeenCalledTimes(1)
       expect(fetcherSpy).toHaveBeenCalledWith({

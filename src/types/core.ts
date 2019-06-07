@@ -1,5 +1,8 @@
+import { ThunkDispatch } from 'redux-thunk'
 import Routes from '../constants/routes'
 import ActionTypes from '../constants/action-types'
+import { HomeState } from '../reducers/home'
+import { ItemState } from '../reducers/item'
 
 export interface Action<T> {
   readonly type: ActionType
@@ -20,3 +23,10 @@ export interface FetcherParams<T> {
   url: string
   body?: T
 }
+
+export interface ReduxState {
+  home: HomeState
+  item: ItemState
+}
+
+export type ReduxDispatch = ThunkDispatch<ReduxState, void, Action<any>>

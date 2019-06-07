@@ -1,6 +1,7 @@
 import homeReducer, { defaultState } from '../home'
 import { ActionType } from '../../types/core'
 import ActionTypes from '../../constants/action-types'
+import { homeDataStub } from '../../thunks/__stubs__/home'
 
 describe('home reducer', () => {
   it('should return default state if action not matched', () => {
@@ -18,13 +19,19 @@ describe('home reducer', () => {
   })
 
   it('should set home item data when HOME_RECEIVE_DATA action is called', () => {
-    const data = {
-      name: 'Bob'
-    }
-    const newState = homeReducer(undefined, { type: ActionTypes.HOME_RECEIVE_DATA as ActionType, data })
+    const newState = homeReducer(undefined, { type: ActionTypes.HOME_RECEIVE_DATA as ActionType, data: homeDataStub })
     const expected = {
       ...defaultState,
-      homeData: data
+      homeData: homeDataStub
+    }
+    expect(newState).toEqual(expected)
+  })
+
+  it('should clear home item data when HOME_CLEAR_DATA action is called', () => {
+    const newState = homeReducer(undefined, { type: ActionTypes.HOME_CLEAR_DATA as ActionType, data: null })
+    const expected = {
+      ...defaultState,
+      homeData: null
     }
     expect(newState).toEqual(expected)
   })

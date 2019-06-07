@@ -2,8 +2,7 @@ import { createStore, applyMiddleware, compose, combineReducers, Store as ReduxS
 import thunk, { ThunkDispatch } from 'redux-thunk'
 import home from '../reducers/home'
 import item from '../reducers/item'
-import { ReduxState } from '../types/state'
-import { Action } from '../types/core'
+import { Action, ReduxDispatch, ReduxState } from '../types/core'
 
 export class Store {
   static _instance: Store
@@ -48,7 +47,7 @@ export class Store {
     }
   }
 
-  get dispatch(): ThunkDispatch<ReduxState, void, Action<any>> {
+  get dispatch(): ReduxDispatch {
     return this.reduxStore.dispatch
   }
 

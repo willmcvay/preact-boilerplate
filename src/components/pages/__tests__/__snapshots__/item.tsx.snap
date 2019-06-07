@@ -1,7 +1,40 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Item should match a snapshot 1`] = `
-<div>
-  Item Page
-</div>
+<Fragment>
+  <h1>
+    Node JS
+  </h1>
+  <div>
+    <a
+      onClick={[MockFunction]}
+    >
+      Clear All
+    </a>
+  </div>
+  <div>
+    <a
+      onClick={[MockFunction]}
+    >
+      Fetch All
+    </a>
+  </div>
+  <div>
+    <Link
+      to="/"
+    >
+      Home Page
+    </Link>
+  </div>
+  <div
+    key="someid"
+  >
+    <a
+      href="http://something.com"
+      target="_blank"
+    >
+      Title
+    </a>
+  </div>
+</Fragment>
 `;

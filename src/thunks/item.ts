@@ -2,7 +2,7 @@ import { Dispatch } from 'redux'
 import fetcher from '../utils/fetcher'
 import { URLS } from '../constants/api'
 import { itemLoading, itemReceiveData } from '../actions/item'
-import { ItemItem } from '../types/item'
+import { ItemItem } from '../reducers/item'
 
 export const itemDataFetch = () => async (dispatch: Dispatch) => {
   try {
