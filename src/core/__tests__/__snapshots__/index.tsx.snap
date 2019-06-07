@@ -12,6 +12,7 @@ exports[`App should match a snapshot 1`] = `
     }
   }
 >
+  <GlobalStyleComponent />
   <Component />
 </Provider>
 `;
