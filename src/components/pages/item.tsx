@@ -2,10 +2,10 @@ import * as React from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { Container, Header, Menu, Divider, Loader, Dimmer } from 'semantic-ui-react'
-import { ReduxState, ReduxDispatch } from '../../types/core'
+import { ReduxState } from '../../types/core'
 import { ItemState } from '../../reducers/item'
 import { itemClearData } from '../../actions/item'
-import { itemDataFetch } from '../../thunks/item'
+import { itemDataFetch } from '../../sagas/item'
 import Routes from '../../constants/routes'
 
 export interface ItemMappedActions {
@@ -56,7 +56,7 @@ const mapStateToProps = (state: ReduxState): ItemMappedProps => ({
   itemState: state.item
 })
 
-const mapDispatchToProps = (dispatch: ReduxDispatch): ItemMappedActions => ({
+const mapDispatchToProps = (dispatch: any): ItemMappedActions => ({
   itemClearData: () => dispatch(itemClearData(null)),
   itemDataFetch: () => dispatch(itemDataFetch())
 })

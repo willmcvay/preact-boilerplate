@@ -1,4 +1,3 @@
-import { ThunkDispatch } from 'redux-thunk'
 import Routes from '../constants/routes'
 import ActionTypes from '../constants/action-types'
 import { HomeState } from '../reducers/home'
@@ -29,4 +28,4 @@ export interface ReduxState {
   item: ItemState
 }
 
-export type ReduxDispatch = ThunkDispatch<ReduxState, void, Action<any>>
+// export type ReduxDispatch = ThunkDispatch<ReduxState, void, Action<any>>

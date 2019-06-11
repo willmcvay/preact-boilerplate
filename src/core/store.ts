@@ -1,8 +1,10 @@
-import { createStore, applyMiddleware, compose, combineReducers, Store as ReduxStore } from 'redux'
-import thunk, { ThunkDispatch } from 'redux-thunk'
+import { createStore, applyMiddleware, compose, combineReducers, Store as ReduxStore, Dispatch } from 'redux'
 import home from '../reducers/home'
 import item from '../reducers/item'
-import { Action, ReduxDispatch, ReduxState } from '../types/core'
+import { ReduxState } from '../types/core'
+import createSagaMiddleware from 'redux-saga'
+import { fork, all } from '@redux-saga/core/effects'
+import homeSagas from '../sagas/home'
 
 export class Store {
   static _instance: Store
@@ -17,10 +19,16 @@ export class Store {
 
   static isProd = process.env.NODE_ENV === 'production'
 
+  static sagaMiddleware = createSagaMiddleware()
+
   static reducers = combineReducers({
     home,
     item
   })
+
+  static sagas = function*() {
+    yield all([fork(homeSagas)])
+  }
 
   static composeEnhancers =
     !Store.isProd && window && (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
@@ -30,9 +38,12 @@ export class Store {
   reduxStore: ReduxStore<ReduxState>
 
   constructor() {
-    const composed = Store.composeEnhancers(applyMiddleware(thunk))
+    const composed = Store.composeEnhancers(applyMiddleware(Store.sagaMiddleware))
 
     this.reduxStore = createStore(Store.reducers, composed)
+
+    Store.sagaMiddleware.run(Store.sagas)
+
     this.hotModuleReloading()
   }
 
@@ -47,7 +58,7 @@ export class Store {
     }
   }
 
-  get dispatch(): ReduxDispatch {
+  get dispatch(): Dispatch {
     return this.reduxStore.dispatch
   }
 

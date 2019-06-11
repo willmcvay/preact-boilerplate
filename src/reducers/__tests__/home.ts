@@ -1,7 +1,7 @@
 import homeReducer, { defaultState } from '../home'
 import { ActionType } from '../../types/core'
 import ActionTypes from '../../constants/action-types'
-import { homeDataStub } from '../../thunks/__stubs__/home'
+import { homeDataStub } from '../../sagas/__stubs__/home'
 
 describe('home reducer', () => {
   it('should return default state if action not matched', () => {

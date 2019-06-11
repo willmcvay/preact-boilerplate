@@ -2,7 +2,7 @@ import * as React from 'react'
 import { shallow } from 'enzyme'
 import toJson from 'enzyme-to-json'
 import { Item, ItemProps } from '../item'
-import { itemDataStub } from '../../../thunks/__stubs__/item'
+import { itemDataStub } from '../../../sagas/__stubs__/item'
 
 const props: ItemProps = {
   itemState: {

@@ -1,7 +1,7 @@
 import itemReducer, { defaultState } from '../item'
 import { ActionType } from '../../types/core'
 import ActionTypes from '../../constants/action-types'
-import { itemDataStub } from '../../thunks/__stubs__/item'
+import { itemDataStub } from '../../sagas/__stubs__/item'
 
 describe('item reducer', () => {
   it('should return default state if action not matched', () => {

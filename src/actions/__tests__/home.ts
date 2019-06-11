@@ -1,6 +1,6 @@
 import { homeLoading, homeReceiveData } from '../home'
 import ActionTypes from '../../constants/action-types'
-import { homeDataStub } from '../../thunks/__stubs__/home'
+import { homeDataStub } from '../../sagas/__stubs__/home'
 
 describe('home actions', () => {
   it('should create a homeLoading action', () => {

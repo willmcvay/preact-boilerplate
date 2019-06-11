@@ -2,10 +2,10 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Container, Header, Menu, Divider, Loader, Dimmer } from 'semantic-ui-react'
-import { ReduxState, ReduxDispatch } from '../../types/core'
+import { ReduxState } from '../../types/core'
 import { HomeState } from '../../reducers/home'
 import { homeClearData } from '../../actions/home'
-import { homeDataFetch } from '../../thunks/home'
+import { homeDataFetch } from '../../sagas/home'
 import Routes from '../../constants/routes'
 
 export interface HomeMappedActions {
@@ -56,7 +56,7 @@ const mapStateToProps = (state: ReduxState): HomeMappedProps => ({
   homeState: state.home
 })
 
-const mapDispatchToProps = (dispatch: ReduxDispatch): HomeMappedActions => ({
+const mapDispatchToProps = (dispatch: any): HomeMappedActions => ({
   homeClearData: () => dispatch(homeClearData(null)),
   homeDataFetch: () => dispatch(homeDataFetch())
 })

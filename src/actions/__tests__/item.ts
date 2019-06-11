@@ -1,6 +1,6 @@
 import { itemLoading, itemReceiveData } from '../item'
 import ActionTypes from '../../constants/action-types'
-import { itemDataStub } from '../../thunks/__stubs__/item'
+import { itemDataStub } from '../../sagas/__stubs__/item'
 
 describe('home actions', () => {
   it('should create a itemLoading action', () => {

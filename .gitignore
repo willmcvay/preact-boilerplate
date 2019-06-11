@@ -2,3 +2,4 @@ node_modules
 public/dist
 src/tests/coverage
 .vscode
+.DS_Store

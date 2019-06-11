@@ -2,7 +2,7 @@ import * as React from 'react'
 import { shallow } from 'enzyme'
 import toJson from 'enzyme-to-json'
 import { Home, HomeProps } from '../home'
-import { homeDataStub } from '../../../thunks/__stubs__/home'
+import { homeDataStub } from '../../../sagas/__stubs__/home'
 
 const props: HomeProps = {
   homeState: {
