@@ -1,16 +1,14 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { Container, Header, Menu, Divider, Loader, Dimmer } from 'semantic-ui-react'
 import { ReduxState } from '../../types/core'
 import { HomeState } from '../../reducers/home'
-import { homeClearData } from '../../actions/home'
-import { homeDataFetch } from '../../sagas/home'
+import { homeClearData, homeRequestData } from '../../actions/home'
 import Routes from '../../constants/routes'
 
 export interface HomeMappedActions {
   homeClearData: () => void
-  homeDataFetch: () => void
+  homeRequestData: () => void
 }
 
 export interface HomeMappedProps {
@@ -18,38 +16,41 @@ export interface HomeMappedProps {
 }
 export type HomeProps = HomeMappedActions & HomeMappedProps
 
-export const Home: React.FunctionComponent<HomeProps> = ({ homeClearData, homeDataFetch, homeState }) => (
-  <Container text>
-    <Header as="h1">React JS</Header>
-    <Menu>
-      <Menu.Item>
-        <a onClick={homeClearData}>Clear All</a>
-      </Menu.Item>
-      <Menu.Item>
-        <a onClick={homeDataFetch}>Fetch All</a>
-      </Menu.Item>
-      <Menu.Item>
-        <Link to={Routes.ITEM}>Item Page</Link>
-      </Menu.Item>
-    </Menu>
+export const Home: React.FunctionComponent<HomeProps> = ({ homeClearData, homeRequestData, homeState }) => (
+  <div className="container">
+    <h1 className="h1">React JS</h1>
+    <ul className="nav">
+      <li className="nav-item">
+        <a className="nav-link" onClick={homeClearData}>
+          Clear All
+        </a>
+      </li>
+      <li className="nav-item">
+        <a className="nav-link" onClick={homeRequestData}>
+          Fetch All
+        </a>
+      </li>
+      <li className="nav-item">
+        <Link className="nav-link" to={Routes.ITEM}>
+          Item Page
+        </Link>
+      </li>
+    </ul>
     {homeState.loading ? (
-      <Container>
-        <Dimmer active inverted>
-          <Loader size="large">Loading</Loader>
-        </Dimmer>
-      </Container>
+      <h4 className="h4">Loading</h4>
     ) : (
-      homeState.homeData &&
-      homeState.homeData.data.children.map(child => (
-        <div key={child.data.id}>
-          <a target="_blank" href={child.data.url}>
-            {child.data.title}
-          </a>
-          <Divider />
-        </div>
-      ))
+      <div className="list-group">
+        {homeState.homeData &&
+          homeState.homeData.data.children.map(child => (
+            <div key={child.data.id}>
+              <a className="list-group-item list-group-item-action" target="_blank" href={child.data.url}>
+                {child.data.title}
+              </a>
+            </div>
+          ))}
+      </div>
     )}
-  </Container>
+  </div>
 )
 
 const mapStateToProps = (state: ReduxState): HomeMappedProps => ({
@@ -58,7 +59,7 @@ const mapStateToProps = (state: ReduxState): HomeMappedProps => ({
 
 const mapDispatchToProps = (dispatch: any): HomeMappedActions => ({
   homeClearData: () => dispatch(homeClearData(null)),
-  homeDataFetch: () => dispatch(homeDataFetch())
+  homeRequestData: () => dispatch(homeRequestData())
 })
 
 export default connect(

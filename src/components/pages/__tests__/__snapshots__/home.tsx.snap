@@ -1,47 +1,62 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Home should match a snapshot 1`] = `
-<Container
-  text={true}
+<div
+  className="container"
 >
-  <Header
-    as="h1"
+  <h1
+    className="h1"
   >
     React JS
-  </Header>
-  <Menu>
-    <MenuItem>
+  </h1>
+  <ul
+    className="nav"
+  >
+    <li
+      className="nav-item"
+    >
       <a
+        className="nav-link"
         onClick={[MockFunction]}
       >
         Clear All
       </a>
-    </MenuItem>
-    <MenuItem>
+    </li>
+    <li
+      className="nav-item"
+    >
       <a
+        className="nav-link"
         onClick={[MockFunction]}
       >
         Fetch All
       </a>
-    </MenuItem>
-    <MenuItem>
+    </li>
+    <li
+      className="nav-item"
+    >
       <Link
+        className="nav-link"
         to="/item/"
       >
         Item Page
       </Link>
-    </MenuItem>
-  </Menu>
+    </li>
+  </ul>
   <div
-    key="someid"
+    className="list-group"
   >
-    <a
-      href="http://something.com"
-      target="_blank"
+    <div
+      key="someid"
     >
-      Title
-    </a>
-    <Divider />
+      <a
+        className="list-group-item list-group-item-action"
+        href="http://something.com"
+        target="_blank"
+      >
+        Title
+      </a>
+    </div>
   </div>
-</Container>
+</div>
 `;

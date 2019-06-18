@@ -36,7 +36,7 @@ const homeReducer = (state: HomeState = defaultState, action: Action<any>): Home
     return {
       ...state,
       loading: false,
-      homeData: action.data
+      homeData: action.data || null
     }
   }
 

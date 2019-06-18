@@ -5,6 +5,7 @@ import { ReduxState } from '../types/core'
 import createSagaMiddleware from 'redux-saga'
 import { fork, all } from '@redux-saga/core/effects'
 import homeSagas from '../sagas/home'
+import itemSagas from '../sagas/item'
 
 export class Store {
   static _instance: Store
@@ -27,7 +28,7 @@ export class Store {
   })
 
   static sagas = function*() {
-    yield all([fork(homeSagas)])
+    yield all([fork(homeSagas), fork(itemSagas)])
   }
 
   static composeEnhancers =

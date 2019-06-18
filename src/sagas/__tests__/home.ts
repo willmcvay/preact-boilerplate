@@ -1,60 +1,37 @@
-// import { homeDataFetch } from '../home'
-// import ActionTypes from '../../constants/action-types'
-// import * as fetcher from '../../utils/fetcher'
-// import { URLS } from '../../constants/api'
-// import { homeDataStub } from '../__stubs__/home'
+import homeSagas, { homeDataFetch, homeDataListen } from '../home'
+import ActionTypes from '../../constants/action-types'
+import fetcher from '../../utils/fetcher'
+import { URLS } from '../../constants/api'
+import { call, put, takeEvery, all, fork } from '@redux-saga/core/effects'
+import { homeLoading, homeReceiveData } from '../../actions/home'
 
-// jest.mock('../../utils/fetcher')
+describe('home thunks', () => {
+  describe('homeDataFetch', () => {
+    it('should trigger loading, call api then return data', () => {
+      const gen = homeDataFetch()
 
-// const mockDispatch = jest.fn()
+      expect(gen.next().value).toEqual(put(homeLoading(true)))
+      expect(gen.next().value).toEqual(call(fetcher, { url: URLS.react, method: 'GET' }))
+      expect(gen.next().value).toEqual(put(homeReceiveData(undefined)))
+      expect(gen.next().done).toBe(true)
+    })
+  })
 
-// describe('home thunks', () => {
-//   describe('homeDataFetch', () => {
-//     it('should receive data', async () => {
-//       const fetcherSpy = jest.spyOn(fetcher, 'default').mockReturnValue(Promise.resolve(homeDataStub))
+  describe('homeDataListen', () => {
+    it('should trigger loading', () => {
+      const gen = homeDataListen()
 
-//       await homeDataFetch()(mockDispatch)
+      expect(gen.next().value).toEqual(takeEvery(ActionTypes.HOME_REQUEST_DATA, homeDataFetch))
+      expect(gen.next().done).toBe(true)
+    })
+  })
 
-//       expect(mockDispatch).toHaveBeenCalledTimes(2)
-//       expect(mockDispatch).toHaveBeenCalledWith({
-//         type: ActionTypes.HOME_LOADING,
-//         data: true
-//       })
-//       expect(mockDispatch).toHaveBeenCalledWith({
-//         type: ActionTypes.HOME_RECEIVE_DATA,
-//         data: homeDataStub
-//       })
-//       expect(fetcherSpy).toHaveBeenCalledTimes(1)
-//       expect(fetcherSpy).toHaveBeenCalledWith({
-//         url: URLS.react,
-//         method: 'GET'
-//       })
-//     })
+  describe('homeSagas', () => {
+    it('should trigger loading', () => {
+      const gen = homeSagas()
 
-//     it('should thow and catch an error if no data returned', async () => {
-//       const fetcherSpy = jest.spyOn(fetcher, 'default').mockReturnValue(Promise.resolve(undefined))
-//       const consoleSpy = jest.spyOn(console, 'error')
-
-//       await homeDataFetch()(mockDispatch)
-
-//       expect(mockDispatch).toHaveBeenCalledTimes(1)
-//       expect(mockDispatch).toHaveBeenCalledWith({
-//         type: ActionTypes.HOME_LOADING,
-//         data: true
-//       })
-
-//       expect(fetcherSpy).toHaveBeenCalledTimes(1)
-//       expect(fetcherSpy).toHaveBeenCalledWith({
-//         url: URLS.react,
-//         method: 'GET'
-//       })
-
-//       expect(consoleSpy).toHaveBeenCalledTimes(1)
-//       expect(consoleSpy).toHaveBeenCalledWith('Error fetching data')
-//     })
-//   })
-
-//   afterEach(() => {
-//     jest.resetAllMocks()
-//   })
-// })
+      expect(gen.next().value).toEqual(all([fork(homeDataListen)]))
+      expect(gen.next().done).toBe(true)
+    })
+  })
+})

@@ -1,60 +1,37 @@
-// import { itemDataFetch } from '../item'
-// import ActionTypes from '../../constants/action-types'
-// import * as fetcher from '../../utils/fetcher'
-// import { URLS } from '../../constants/api'
-// import { itemDataStub } from '../__stubs__/item'
+import itemSagas, { itemDataFetch, itemDataListen } from '../item'
+import ActionTypes from '../../constants/action-types'
+import fetcher from '../../utils/fetcher'
+import { URLS } from '../../constants/api'
+import { call, put, takeEvery, all, fork } from '@redux-saga/core/effects'
+import { itemLoading, itemReceiveData } from '../../actions/item'
 
-// jest.mock('../../utils/fetcher')
+describe('item thunks', () => {
+  describe('itemDataFetch', () => {
+    it('should trigger loading, call api then return data', () => {
+      const gen = itemDataFetch()
 
-// const mockDispatch = jest.fn()
+      expect(gen.next().value).toEqual(put(itemLoading(true)))
+      expect(gen.next().value).toEqual(call(fetcher, { url: URLS.node, method: 'GET' }))
+      expect(gen.next().value).toEqual(put(itemReceiveData(undefined)))
+      expect(gen.next().done).toBe(true)
+    })
+  })
 
-// describe('item thunks', () => {
-//   describe('itemDataFetch', () => {
-//     it('should receive data', async () => {
-//       const fetcherSpy = jest.spyOn(fetcher, 'default').mockReturnValue(Promise.resolve(itemDataStub))
+  describe('itemDataListen', () => {
+    it('should trigger loading', () => {
+      const gen = itemDataListen()
 
-//       await itemDataFetch()(mockDispatch)
+      expect(gen.next().value).toEqual(takeEvery(ActionTypes.ITEM_REQUEST_DATA, itemDataFetch))
+      expect(gen.next().done).toBe(true)
+    })
+  })
 
-//       expect(mockDispatch).toHaveBeenCalledTimes(2)
-//       expect(mockDispatch).toHaveBeenCalledWith({
-//         type: ActionTypes.ITEM_LOADING,
-//         data: true
-//       })
-//       expect(mockDispatch).toHaveBeenCalledWith({
-//         type: ActionTypes.ITEM_RECEIVE_DATA,
-//         data: itemDataStub
-//       })
-//       expect(fetcherSpy).toHaveBeenCalledTimes(1)
-//       expect(fetcherSpy).toHaveBeenCalledWith({
-//         url: URLS.node,
-//         method: 'GET'
-//       })
-//     })
+  describe('itemSagas', () => {
+    it('should trigger loading', () => {
+      const gen = itemSagas()
 
-//     it('should thow and catch an error if no data returned', async () => {
-//       const fetcherSpy = jest.spyOn(fetcher, 'default').mockReturnValue(Promise.resolve(undefined))
-//       const consoleSpy = jest.spyOn(console, 'error')
-
-//       await itemDataFetch()(mockDispatch)
-
-//       expect(mockDispatch).toHaveBeenCalledTimes(1)
-//       expect(mockDispatch).toHaveBeenCalledWith({
-//         type: ActionTypes.ITEM_LOADING,
-//         data: true
-//       })
-
-//       expect(fetcherSpy).toHaveBeenCalledTimes(1)
-//       expect(fetcherSpy).toHaveBeenCalledWith({
-//         url: URLS.node,
-//         method: 'GET'
-//       })
-
-//       expect(consoleSpy).toHaveBeenCalledTimes(1)
-//       expect(consoleSpy).toHaveBeenCalledWith('Error fetching data')
-//     })
-//   })
-
-//   afterEach(() => {
-//     jest.resetAllMocks()
-//   })
-// })
+      expect(gen.next().value).toEqual(all([fork(itemDataListen)]))
+      expect(gen.next().done).toBe(true)
+    })
+  })
+})

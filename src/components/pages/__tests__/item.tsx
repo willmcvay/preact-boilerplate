@@ -10,7 +10,7 @@ const props: ItemProps = {
     itemData: itemDataStub
   },
   itemClearData: jest.fn(),
-  itemDataFetch: jest.fn()
+  itemRequestData: jest.fn()
 }
 
 describe('Item', () => {
@@ -27,12 +27,12 @@ describe('Item', () => {
     expect(props.itemClearData).toHaveBeenCalledTimes(1)
   })
 
-  it('should dispatch itemDataFetch onClick', () => {
+  it('should dispatch itemRequestData onClick', () => {
     shallow(<Item {...props} />)
       .find('a')
       .at(1)
       .simulate('click')
 
-    expect(props.itemDataFetch).toHaveBeenCalledTimes(1)
+    expect(props.itemRequestData).toHaveBeenCalledTimes(1)
   })
 })

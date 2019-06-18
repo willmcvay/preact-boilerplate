@@ -36,7 +36,7 @@ const itemReducer = (state: ItemState = defaultState, action: Action<any>): Item
     return {
       ...state,
       loading: false,
-      itemData: action.data
+      itemData: action.data || null
     }
   }
 

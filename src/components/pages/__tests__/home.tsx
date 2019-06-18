@@ -10,7 +10,7 @@ const props: HomeProps = {
     homeData: homeDataStub
   },
   homeClearData: jest.fn(),
-  homeDataFetch: jest.fn()
+  homeRequestData: jest.fn()
 }
 
 describe('Home', () => {
@@ -27,12 +27,12 @@ describe('Home', () => {
     expect(props.homeClearData).toHaveBeenCalledTimes(1)
   })
 
-  it('should dispatch homeDataFetch onClick', () => {
+  it('should dispatch homeRequestData onClick', () => {
     shallow(<Home {...props} />)
       .find('a')
       .at(1)
       .simulate('click')
 
-    expect(props.homeDataFetch).toHaveBeenCalledTimes(1)
+    expect(props.homeRequestData).toHaveBeenCalledTimes(1)
   })
 })
